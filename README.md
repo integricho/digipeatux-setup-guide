@@ -8,4 +8,4 @@ The setup guide is available in the following languages:
 
 ## Credits
 
-`digipeatux` came to life from the idea of Dalibor Sili (DL7ORE / YU7ORE). Without his contributions, the project wouldn't have seen the light of day.
+_digipeatux_ came to life from the idea of Süli Dalibor (DL7ORE / YU7ORE). Without his contributions, the project wouldn't have seen the light of day.
