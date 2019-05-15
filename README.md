@@ -3,8 +3,6 @@
 The setup guide is available in the following languages:
 
 - [English](English.md)
-- [German](German.md)
-- [Serbian](Serbian.md)
 
 ## Credits
 

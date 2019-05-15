@@ -1,18 +1,18 @@
 # digipeatux setup guide
 
-A minimalistic embedded Linux system for setting up APRS digipeaters and/or internet gateways, based on [Buildroot](https://buildroot.org/). Although there are numerous possibilities for building and running an APRS digipeater, we have tried to assemble one from relatively cheaply and easily acquirable components, and at the same time to make it's setup process as easy as possible. The resulting Linux system is not really generic, as it's configured to include only the specific software packages needed to work with the chosen hardware components, but then again, a fully generic solution wasn't the design goal either. For that case, generic Linux distributions are already available. This is a highly constrained system that contains the bare minimum needed to accomplish the task of running an APRS digipeater on a specific set of hardware components and nothing else.
+digipeatux is a minimalistic embedded Linux system for setting up APRS digipeaters and/or internet gateways, based on [Buildroot](https://buildroot.org/). Although there are numerous possibilities for building and running an APRS digipeater, we have tried to assemble one from relatively cheaply and easily acquirable components, and at the same time to make it's setup process as easy as possible. The resulting Linux system is not really generic, as it's configured to include only the specific software packages needed to work with the chosen hardware components, but then again, a fully generic solution wasn't the design goal either. For that case, generic Linux distributions are already available. This is a highly constrained system that contains the bare minimum needed to accomplish the task of running an APRS digipeater on a specific set of hardware components and nothing else.
 
 The list of needed hardware components are:
 
 - Raspberry Pi board (all models are supported)
 - microSD card of at least 512MB capacity
 - USB sound card (probably any model but we've tried only a few)
-- AFSK AX.25 1200 baud soundmodem
 - Amateur radio transmitter
 - One-channel relay module with optocoupler 5V 10A
 - NPN Transistor TO-92 2N2222
 - 5K resistor
 - Breadboard (to assemble the components)
+- AFSK AX.25 1200 baud soundmodem (or see a below shown schematic on how to assemble one and which components are needed)
 
 The software packages chosen for running the digipeater are:
 
@@ -37,11 +37,11 @@ A successful build process should result with an `sdcard.img` file generated in 
 dd if=./build/rpi2/images/sdcard.img of=/dev/mmcblk0 bs=1M
 ```
 
-Note for Windows users: It is possible build the image from within WSL as well, but it's not as straightforward as on an actual Linux host, and is also much slower. Burning the sdcard image on the other hand is doable with any of the available utilities, such as [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/).
+Note for Windows users: It is possible to build the image from within WSL as well, but it's not as straightforward as on an actual Linux host, and is also much slower. Burning the sdcard image on the other hand is doable with any of the available utilities, such as [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/).
 
 ## Hardware setup
 
-- Follow the supplied schematic to assemble a sound modem.
+- Follow the supplied schematic to assemble a sound modem if you don't have one already.
 
 ![soundmodem](resources/soundmodem.png "Soundmodem schematic")
 
@@ -58,7 +58,9 @@ In order to trigger a retransmission from our side after we receive a message su
 ![soundmodem_with_rts_inverter02](resources/soundmodem_with_rts_inverter02.jpg "Soundmodem with RTS inverter")
 ![soundmodem_with_rts_inverter03](resources/soundmodem_with_rts_inverter03.jpg "Soundmodem with RTS inverter")
 
-This helper mechanism needs to be supplied with +5V, so any free +5V pin of the Raspberry Pi and a GND pin can be utilized for it. Another slight problem occurred, where the start of every transmission was slightly cut-off due to the software starting the transmission immediately after it sets the RTS (GPIO 17) pin. This happened because there is a slight delay while the PTT mechanism toggles the radio transmitter into the _transmit_ mode, but while this was happening the software was already pumping out the audio signal. Luckily this could be easily solved by adding a little artificial delay to the soundmodem configuration (`txdelay` parameter located in `/etc/ax25/soundmodem.conf`):
+This helper mechanism needs to be supplied with +5V, so any free +5V pin of the Raspberry Pi and a GND pin can be utilized for it.
+
+The other problem manifested itself by cutting-off the start of every transmission slightly, due to the software starting the transmission immediately after it sets the RTS (GPIO 17) pin. This happened because there is a slight delay while the PTT mechanism toggles the radio transmitter into the _transmit_ mode, but while this was happening the software was already pumping out the audio signal. Luckily this could be easily solved by adding a little artificial delay to the soundmodem configuration (`txdelay` parameter located in `/etc/ax25/soundmodem.conf`):
 
 ```xml
 ...
@@ -68,7 +70,15 @@ This helper mechanism needs to be supplied with +5V, so any free +5V pin of the 
 
 ## Booting the system
 
-When the system boots, follow the on-screen instructions to execute the semi-automated setup process. After the setup process is completed and the system is rebooted, the digipeater should be up and running.
+When the system boots, follow the on-screen instructions to execute the semi-automated setup process.
+
+```
+sudo setup
+...
+sudo reboot
+```
+
+After the setup process is completed and the system is rebooted, the digipeater should be up and running.
 
 ## Modifications
 
