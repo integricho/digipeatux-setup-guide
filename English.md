@@ -70,7 +70,9 @@ The other problem manifested itself by cutting-off the start of every transmissi
 
 ## Booting the system
 
-When the system boots, follow the on-screen instructions to execute the semi-automated setup process.
+When the system boots, an SSH server will be accepting connections on port 22. The default username is `aprs` and the password is also `aprs`. (Be mindful about exposing the system as-is over an open internet connection.)
+
+After logging in for the first time, follow the on-screen instructions to execute the semi-automated setup process.
 
 ```
 sudo setup
@@ -78,7 +80,7 @@ sudo setup
 sudo reboot
 ```
 
-After the setup process is completed and the system is rebooted, the digipeater should be up and running.
+After the setup process is completed and the system is rebooted, the digipeater should be up and running. Log files for both _aprx_ and _soundmodem_ can be found under `/var/log/`, which might help to confirm if everything is working as expected.
 
 ## Modifications
 
