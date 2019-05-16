@@ -4,7 +4,7 @@ digipeatux is a minimalistic embedded Linux system for setting up APRS digipeate
 
 The list of needed hardware components are:
 
-- Raspberry Pi board (all models are supported)
+- Raspberry Pi board (1, 2, 3)
 - microSD card of at least 512MB capacity
 - USB sound card (probably any model but we've tried only a few)
 - Amateur radio transmitter
