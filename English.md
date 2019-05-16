@@ -72,6 +72,10 @@ The other problem manifested itself by cutting-off the start of every transmissi
 
 When the system boots, an SSH server will be accepting connections on port 22. The default username is `aprs` and the password is also `aprs`. (Be mindful about exposing the system as-is over an open internet connection.)
 
+```
+ssh aprs@192.168.x.x
+```
+
 After logging in for the first time, follow the on-screen instructions to execute the semi-automated setup process.
 
 ```
