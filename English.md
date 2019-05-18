@@ -21,6 +21,8 @@ The software packages chosen for running the digipeater are:
 
 ## Usage
 
+Download a pre-built image from [this link](https://www.dropbox.com/sh/d6xpmo17zjeslqc/AAAoB57gmTEhdWCFdpFYZj6Ma?dl=0) or build one customized for yourself.
+
 Before attempting to build an image, make sure that all dependencies of _buildroot_ are met on your host system. To do so, check the section dedicated to the topic in _buildroot_'s [manual](https://buildroot.org/downloads/manual/manual.html#requirement) and install everything listed as mandatory there.
 
 To build an image, clone this repository, and from it's root just execute `make BOARD=<target>`, where `<target>` is one of the following values: `rpi`, `rpi2`, `rpi3`, `rpi0`, e.g.:
